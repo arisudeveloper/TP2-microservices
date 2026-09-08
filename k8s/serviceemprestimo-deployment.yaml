@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceemprestimo-deployment
+  labels:
+    app: serviceemprestimo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviceemprestimo
+  template:
+    metadata:
+      labels:
+        app: serviceemprestimo
+    spec:
+      containers:
+        - name: serviceemprestimo
+          image: serviceemprestimo-image
+          ports:
+            - containerPort: 8080
+          env:
+            - name: LIVRO_SERVICE_URL
+              value: "http://container-livro:8080"
