@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  servicelivro:
+    build:
+      context: ./servicelivro
+      dockerfile: Dockerfile
+    image: servicelivro-image
+    container_name: container-livro
+    ports:
+      - "8080:8080"
+    networks:
+      - biblioteca-net
+
+  serviceemprestimo:
+    build:
+      context: ./serviceemprestimo
+      dockerfile: Dockerfile
+    image: serviceemprestimo-image
+    container_name: container-emprestimo
+    ports:
+      - "8082:8082"
+    networks:
+      - biblioteca-net
+    depends_on:
+      - servicelivro
+
+networks:
+  biblioteca-net:
+    driver: bridge

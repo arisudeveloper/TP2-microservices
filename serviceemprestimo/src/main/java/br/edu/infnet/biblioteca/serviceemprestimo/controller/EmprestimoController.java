@@ -34,7 +34,7 @@ public class EmprestimoController {
 
     @PostMapping
     public Object criar(@RequestBody Emprestimo emprestimo) {
-        String urlLivro = "http://host.docker.internal:8080/livros/" + emprestimo.getLivroId();
+        String urlLivro = "http://container-livro:8080/livros/" + emprestimo.getLivroId();
         try {
             Object livro = restTemplate.getForObject(urlLivro, Object.class);
 
